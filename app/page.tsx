@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./page.module.css";
 import { v4 } from "uuid";
 import toast from "react-hot-toast";
@@ -19,7 +19,6 @@ export default function Home() {
   const [formDetails, setFormDetails] = useState<StringObject>({});
   const inputFieldRef = useRef<HTMLInputElement>(null);
   const selectRef = useRef<HTMLInputElement>(null);
-  const formRef = useRef<HTMLFormElement>(null);
 
   const emptyTheFormBuilderFields = () => {
     const fieldNameInput = document.getElementById(
@@ -42,13 +41,15 @@ export default function Home() {
 
       return emptyForm;
     });
-    formRef.current?.reset();
 
     for (let i = 0; i < formElementsIds.length; i += 1) {
       const element = document.getElementById(formElementsIds[i]);
       if (element?.tagName === "SELECT") {
         const selectElement = element as HTMLSelectElement;
         selectElement.value = "";
+      } else {
+        const inputElement = element as HTMLInputElement;
+        inputElement.value = "";
       }
     }
   };
@@ -160,7 +161,6 @@ export default function Home() {
       setFormElementsIds((prevFormElementsIds) => {
         const fEIds = [...prevFormElementsIds];
         fEIds.push(fieldName);
-        // localStorage.setItem("formElementIds", fEIds.join(","));
         return fEIds;
       });
     }
@@ -194,10 +194,6 @@ export default function Home() {
 
   const renderData = (fD: StringObject) => {
     const { id, ...data } = fD;
-    // for (const key in fD) {
-    //   if (key === "id") continue;
-    //   dataInJSX.push(<p key={v4()}>{`"${key}": ${fD[key]}`}</p>);
-    // }
     console.log(fD);
     return (
       <Card className={styles.card}>
@@ -246,7 +242,7 @@ export default function Home() {
       {/*  */}
       <div className={styles.cForm}>
         {customForm.length !== 0 && <h1>YOUR CUSTOM FORM</h1>}
-        <form ref={formRef}>
+        <form>
           {customForm}
           {customForm.length !== 0 && (
             <Button type="submit" onClick={saveDetails}>
