@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
+import Header from "@/components/Header";
 
 type StringObject = {
   [key: string]: string;
@@ -63,10 +64,17 @@ export default function Home() {
         toast.error("Field's name can't be empty!");
         return;
       }
+      for (let i = 0; i < formElementsIds.length; i += 1)
+        if (fieldName === formElementsIds[i]) {
+          toast.error(
+            "A form element with this field name already exists in the custom form!"
+          );
+          return;
+        }
       setCustomForm((prevCustomForm) => {
         const cF: JSX.Element[] | null = [...prevCustomForm];
         cF.push(
-          <div key={fieldName}>
+          <div key={fieldName} className={styles.customElement}>
             <Label htmlFor={fieldName}>{fieldName}</Label>
             <Input
               value={formDetails[fieldName]}
@@ -79,7 +87,6 @@ export default function Home() {
             ></Input>
           </div>
         );
-        // localStorage.setItem("formElements", JSON.stringify(cF));
         return cF;
       });
 
@@ -108,6 +115,13 @@ export default function Home() {
         toast.error("Field's name can't be empty!");
         return;
       }
+      for (let i = 0; i < formElementsIds.length; i += 1)
+        if (fieldName === formElementsIds[i]) {
+          toast.error(
+            "A form element with this field name already exists in the custom form!"
+          );
+          return;
+        }
       if (selectRef.current?.value === "") {
         toast.error("Option list can't be empty!");
         return;
@@ -196,6 +210,7 @@ export default function Home() {
 
   return (
     <div className={styles.customForm}>
+      <Header />
       {/*  */}
       <div className={styles.actionsSection}>
         <h1>ACTIONS</h1>

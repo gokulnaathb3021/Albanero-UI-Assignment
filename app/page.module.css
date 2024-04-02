@@ -50,6 +50,7 @@
   display: flex;
   flex-direction: column;
   gap: 3px;
+  margin-top: 20px;
 }
 
 .selectElement {
@@ -76,10 +77,6 @@
   border: 2px solid gray;
 }
 
-.cForm h1 {
-  margin-bottom: 20px;
-}
-
 .display {
   display: flex;
   flex-direction: column;
@@ -99,4 +96,36 @@
 
 .card {
   border: 1px solid whitesmoke;
+}
+
+.customElement {
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 510px) {
+  .customForm {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .values {
+    flex-direction: column;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  padding-left: 20px;
+  background-color: aliceblue;
+  color: darkslateblue;
+  font-weight: bold;
+  font-size: larger;
 }
