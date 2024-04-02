@@ -92,6 +92,7 @@
 .values {
   display: flex;
   gap: 5px;
+  flex-wrap: wrap;
 }
 
 .card {
@@ -128,4 +129,7 @@
   color: darkslateblue;
   font-weight: bold;
   font-size: larger;
+}
+
+@media screen and (max-width: 510px) {
 }
