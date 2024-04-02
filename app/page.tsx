@@ -103,6 +103,7 @@ export default function Home() {
         return fEIds;
       });
     }
+    toast.success("Form element added to your custom form!");
   };
 
   const addSelect = () => {
@@ -164,6 +165,7 @@ export default function Home() {
         return fEIds;
       });
     }
+    toast.success("Form element added to your custom form!");
   };
 
   const saveDetails = (e: React.FormEvent) => {
@@ -190,6 +192,10 @@ export default function Home() {
     });
 
     emptyTheFormFields();
+    toast.success(
+      'Details added, have a look at the "FORM DETAILS" section of the page.',
+      { duration: 5000 }
+    );
   };
 
   const renderData = (fD: StringObject) => {
